@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icon.png')}}" type="image/x-icon">
+</head>
+
+<body>
+
+    <header>
+        <h1>{{ app_name }}</h1>
+        <p class="tagline">Outside for a minute. Noticed for a day.</p>
+        <p class="description">Once a day, step outside and take one photo of whatever catches your eye. Noticed keeps it with a short caption, so you build a gallery of small moments instead of a feed to scroll.</p>
+    </header>
+
+    {% if entries %}
+    <div class="strip" role="img" aria-label="The average color of each day's photo">
+        {% for e in entries[:3] %}
+        <span style="background:{{ e.color }}" title="{{ e.date|format_date }}"></span>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <main class="grid" id="grid">
+        {% if not done_today %}
+        <form class="slot-form" action="/upload" method="post" enctype="multipart/form-data">
+            <label class="slot" id="today">
+                <span class="slot-date">{{ today|format_date }}</span>
+                <span class="slot-main">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 5v14M5 12h14" />
+                    </svg>
+                    <span>Add today's photo</span>
+                </span>
+                <span class="wait">Writing a caption…</span>
+                <input class="sr-only" type="file" id="photo" name="photo" accept="image/*" required>
+            </label>
+        </form>
+        {% endif %}
+
+        {% for e in entries %}
+        <div class="card">
+            <a href="/photo/{{ e.photo }}" target="_blank">
+                <img src="/photo/{{ e.photo }}" alt="Photo from {{ e.date|format_date }}">
+            </a>
+            <time class="date" datetime="{{ e.date }}">{{ e.date|format_date }}</time>
+            <p class="caption">{{ e.caption }}</p>
+        </div>
+        {% endfor %}
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

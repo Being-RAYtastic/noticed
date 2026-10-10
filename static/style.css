@@ -1,0 +1,182 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400&family=Newsreader:ital,wght@0,300;1,400&display=swap");
+
+:root {
+    --mist: #eef1f2;
+    --ink: #23303a;
+    --muted: #667782;
+    --slot: #e1e7ea;
+    --serif: "Newsreader", Georgia, serif;
+    --sans: "Figtree", system-ui, sans-serif;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--mist);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 16px 64px;
+    font-family: var(--sans);
+}
+
+h1 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 2.75rem;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+.tagline {
+    color: var(--muted);
+    margin: 4px 0 0;
+}
+
+.description {
+    color: var(--muted);
+    font-size: small;
+    opacity: 0.6;
+    margin-top: 10px;
+}
+
+.strip {
+    display: flex;
+    height: 14px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 28px;
+    margin-bottom: 28px;
+}
+
+.strip span {
+    flex: 1;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    align-items: start;
+    margin-top: 14px;
+}
+
+.slot-form {
+    display: contents;
+}
+
+.card {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.card .date {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--serif);
+    font-size: 0.8125rem;
+    color: var(--muted);
+    font-style: italic;
+}
+
+.card .caption {
+    margin: 2px 0 0;
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+.slot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    border-radius: 3px;
+    background: var(--slot);
+    cursor: pointer;
+}
+
+.slot:hover {
+    background: #d8e0e3;
+}
+
+.slot-date {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    font-family: var(--serif);
+    font-size: 0.9375rem;
+    color: var(--muted);
+    font-style: italic;
+}
+
+.slot-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8125rem;
+}
+
+.slot-main svg {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+}
+
+.wait {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 14px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8125rem;
+}
+
+.slot.busy {
+    cursor: progress;
+    background: #d8e0e3;
+}
+
+.slot.busy .wait {
+    display: block;
+}
+
+.slot.busy .slot-main {
+    opacity: 0.4;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+a:focus-visible,
+.slot:focus-within {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+}
