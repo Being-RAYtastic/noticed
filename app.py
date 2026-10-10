@@ -40,6 +40,7 @@ def index():
 
 @app.route("/upload", methods=["POST"])
 def upload():
+    PHOTOS.mkdir(parents=True, exist_ok=True)
     file = request.files.get("photo")
 
     if not file or file.filename == "":
